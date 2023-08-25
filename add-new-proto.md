@@ -1,3 +1,52 @@
+# Быстрый старт, сборка и установка сурикаты
+
+## Установка зависимостей
+
+Минимум:
+```sh
+sudo apt-get install autoconf automake build-essential ccache clang curl git \
+                     gosu jq libbpf-dev libcap-ng0 libcap-ng-dev libelf-dev \
+                     libevent-dev libgeoip-dev libhiredis-dev libjansson-dev \
+                     liblua5.1-dev libmagic-dev libnet1-dev libpcap-dev \
+                     libpcre2-dev libtool libyaml-0-2 libyaml-dev m4 make \
+                     pkg-config python3 python3-dev python3-yaml sudo zlib1g \
+                     zlib1g-dev
+```
+```sh
+cargo install --force cbindgen
+
+# Или установить PATH на директорию, куда установился cbindgen
+export PATH=${PATH}':/home/<user>/.cargo/bin'
+
+# Или просто скопировать cbindgen в /usr/bin (можно сделать ссылку)
+# sudo cp /home/<user>/.cargo/bin/cbindgen /usr/bin
+```
+
+Необходимо также установить зависимые репозитории:
+```sh
+./scripts/bundle.sh
+```
+
+Если хотим использовать, как IPS, то нужно дополнительно:
+```sh
+sudo apt-get install libnetfilter-queue-dev libnetfilter-queue1  \
+                     libnetfilter-log-dev libnetfilter-log1      \
+                     libnfnetlink-dev libnfnetlink0
+```
+
+## Конфигурирование сборки
+
+```sh
+./autogen.sh
+./configure # you may want to add additional parameters here
+```
+
+## Сборка и установка сурикаты
+```sh
+make
+sudo make install-full
+sudo ldconfig
+```
 
 # Добавление нового протокола в suricata
 
